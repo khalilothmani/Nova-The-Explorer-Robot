@@ -256,12 +256,12 @@ void loop() {
   delay(250);             // 4 Hz update rate
 }
 ``` 
-## 🎮 Remote Controller Demo :
+ 🎮 Remote Controller Demo :
 
 
 <img src="images/nova-remote.gif"  />
 
-##🛞 Semi Rocker-Bogie system Test :
+🛞 Semi Rocker-Bogie system Test :
 
 
 <img src="images/nova-rb-test.gif"  />
