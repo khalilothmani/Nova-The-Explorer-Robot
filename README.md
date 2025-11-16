@@ -3,6 +3,7 @@
 *Inspired by NASA’s Perseverance Mars Rover*  
 
 Nova brings a taste of Mars exploration to Earth, combining **wireless control**, **obstacle detection**, and a **multi-DOF robotic arm**.
+<img src="images/nova-pic-2.jpg" width="400" height="300" />
 
 ![Nova Robot Image](images/nova-pic-2.jpg)
 
