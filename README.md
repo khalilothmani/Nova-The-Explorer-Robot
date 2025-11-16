@@ -231,8 +231,10 @@ void loop() {
   sendSensorData();        // Back to remote
   delay(250);              // 4 Hz update rate
 }
-Example C++ Pseudocode — Remote
-cpp
+```  
+## Example C++ Pseudocode — Remote
+
+``` cpp
 Copy code
 #include <SPI.h>
 #include <nRF24L01.h>
@@ -253,6 +255,7 @@ void loop() {
   sendRadioCommands();    // Rover control
   delay(250);             // 4 Hz update rate
 }
+``` 
 🎮 Remote Controller Demo :
 ![Rover Demo](images/nova-remote.gif)
 
