@@ -3,7 +3,6 @@
 *Inspired by NASA’s Perseverance Mars Rover*  
 
 Nova brings a taste of Mars exploration to Earth, combining **wireless control**, **obstacle detection**, and a **multi-DOF robotic arm**.
-<img src="images/nova-pic-2.jpg" width="400" height="300" />
 
 ![Nova Robot Image](images/nova-pic-2.jpg)
 
@@ -258,18 +257,22 @@ void loop() {
 }
 ``` 
 🎮 Remote Controller Demo :
-![Rover Demo](images/nova-remote.gif)
+
+<img src="images/nova-remote.gif" width="600" height="400" />
 
 🛞 Semi Rocker-Bogie system Test :
-![Rover Demo](images/nova-rb-test.gif)
+<img src="images/nova-rb-test.gif" width="600" height="400" />
+
 
 ### Front View
-![Rover Demo](images/nova-pic-1.JPEG)
+<img src="images/nova-pic-1.JPEG" width="600" height="400" />
+
+
 ### upper View
-![Rover Demo](images/nova-pi.JPEG)
+<img src="images/nova-pic-3.jpg" width="600" height="400" />
 
 
-![Side View](images/nova-pic-3.jpg)
+
 
 
 Future Enhancements:
