@@ -265,11 +265,11 @@ void loop() {
 
 
 ### Front View
-<img src="images/nova-pic-1.JPEG" width="1000" height="400" />
+<img src="images/nova-pic-1.JPEG"  height="1000" />
 
 
 ### upper View
-<img src="images/nova-pic-3.jpg" width="1200" height="400" />
+<img src="images/nova-pic-3.jpg" height="1200" />
 
 
 
