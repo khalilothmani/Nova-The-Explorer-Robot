@@ -258,10 +258,10 @@ void loop() {
 ``` 
 🎮 Remote Controller Demo :
 
-<img src="images/nova-remote.gif" width="600" height="400" />
+<img src="images/nova-remote.gif"  />
 
 🛞 Semi Rocker-Bogie system Test :
-<img src="images/nova-rb-test.gif" width="600" height="400" />
+<img src="images/nova-rb-test.gif"  />
 
 
 ### Front View
