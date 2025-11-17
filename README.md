@@ -85,8 +85,6 @@ Motors -> 5–6V battery
 Servos -> 5–6V battery
 Arduino + RF -> regulated 5V
 
-yaml
-Copy code
 
 ---
 
