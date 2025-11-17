@@ -1,23 +1,24 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-#include <LiquidCrystal.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+// LCD (I2C)
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 // nRF24
-RF24 radio(9, 10); // CE, CSN
-const byte txAddress[6] = "2Node2"; // Remote sends to rover
-const byte rxAddress[6] = "1Node1"; // Remote receives from rover
+RF24 radio(9, 10);
+const byte txAddress[6] = "2Node2"; 
+const byte rxAddress[6] = "1Node1";
 
-// LCD pins
-LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
-
-// Analog sticks
+// Joysticks
 const int analogMovePin = A0;
 const int analogTurnPin = A1;
 const int headXPin = A2;
 const int headYPin = A3;
 
-// Push buttons (arm)
+// Buttons
 const int armUpPin = 2;
 const int armDownPin = 3;
 const int armLeftPin = 4;
@@ -26,7 +27,6 @@ const int armUp2Pin = 6;
 const int armDown2Pin = 7;
 const int flashPin = 8;
 
-// Command struct
 struct RemoteCommand {
   int analogMove;
   int analogTurn;
@@ -41,7 +41,6 @@ struct RemoteCommand {
   bool flash;
 };
 
-// Sensor struct from rover
 struct SensorData {
   int distance;
   bool motionDetected;
@@ -52,7 +51,10 @@ SensorData sensors;
 
 void setup() {
   Serial.begin(9600);
-  lcd.begin(16, 2);
+
+  lcd.init();
+  lcd.backlight();
+  lcd.print("Controller Ready");
 
   // Buttons
   pinMode(armUpPin, INPUT_PULLUP);
@@ -63,12 +65,11 @@ void setup() {
   pinMode(armDown2Pin, INPUT_PULLUP);
   pinMode(flashPin, INPUT_PULLUP);
 
-  // nRF24
   radio.begin();
   radio.openWritingPipe(txAddress);
-  radio.openReadingPipe(1, rxAddress);
+  radio.openReadingPipe(0, rxAddress);
   radio.setPALevel(RF24_PA_LOW);
-  radio.stopListening(); // send first
+  radio.stopListening();
 }
 
 void loop() {
@@ -76,14 +77,14 @@ void loop() {
   sendCommand();
   receiveSensorData();
   displayLCD();
-  delay(250);
+  delay(50);
 }
 
-// ---------- Functions ---------- //
-
+// ===== INPUTS =====
 void readInputs() {
-  command.analogMove = analogRead(analogMovePin);
-  command.analogTurn = analogRead(analogTurnPin);
+  command.analogMove = map(analogRead(analogMovePin), 0, 1023, -100, 100);
+  command.analogTurn = map(analogRead(analogTurnPin), 0, 1023, -100, 100);
+
   command.headX = analogRead(headXPin);
   command.headY = analogRead(headYPin);
 
@@ -96,10 +97,13 @@ void readInputs() {
   command.flash = !digitalRead(flashPin);
 }
 
+// ===== SEND COMMAND =====
 void sendCommand() {
+  radio.stopListening();
   radio.write(&command, sizeof(RemoteCommand));
 }
 
+// ===== RECEIVE SENSOR DATA =====
 void receiveSensorData() {
   radio.startListening();
   if (radio.available()) {
@@ -108,10 +112,13 @@ void receiveSensorData() {
   radio.stopListening();
 }
 
+// ===== LCD =====
 void displayLCD() {
   lcd.clear();
-  lcd.setCursor(0,0);
+  lcd.setCursor(0, 0);
   lcd.print("Dist: "); lcd.print(sensors.distance); lcd.print("cm");
-  lcd.setCursor(0,1);
-  lcd.print("Motion: "); lcd.print(sensors.motionDetected ? "YES" : "NO");
+
+  lcd.setCursor(0, 1);
+  lcd.print("Motion: ");
+  lcd.print(sensors.motionDetected ? "YES" : "NO ");
 }
